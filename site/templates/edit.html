@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1 class="heading heading1-emphasis">Edit Expense</h1>
+    <form method="post">
+        <table class="form-table">
+            <tr>
+                <td style="width: 300px; margin: 0 auto;"><label for="description">Description:</label></td>
+                <td><input type="text" name="description" value="{{ expense[1] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="date">Date:</label></td>
+                <td><input type="date" name="date" value="{{ expense[6] }}" required></td> <!-- Add a date input field with the value from the expense -->
+            </tr>
+            <tr>
+                <td><label for="amount">Amount:</label></td>
+                <td><input type="number" step="0.01" name="amount" value="{{ expense[2] }}" required></td>
+                        </tr>
+            <tr>
+                <td><label for="paid_by">Paid by:</label></td>
+                <td>                    
+                    <select name="paid_by" required>
+                        <option value="Craig" {% if expense[3] == 'Craig' %}selected{% endif %}>Craig</option>
+                        <option value="Nikki" {% if expense[3] == 'Nikki' %}selected{% endif %}>Nikki</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="split_with">Split with:</label></td>
+                <td>
+                    <select name="split_with" required>
+                        <option value="Craig" {% if expense[4] == 'Craig' %}selected{% endif %}>Craig</option>
+                        <option value="Nikki" {% if expense[4] == 'Nikki' %}selected{% endif %}>Nikki</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="is_equal_split">Equal Split:</label></td>
+                <td><input type="checkbox" name="is_equal_split" {% if expense[5] %}checked{% endif %}></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Update" class="submit-button">
+                </td>
+            </tr>
+        </table>
+    </form
+</body>
+</html>
