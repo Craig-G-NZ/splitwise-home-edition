@@ -10,8 +10,8 @@
                 const parameters = await response.json();
     
                 // Update select options based on parameters
-                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
-                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '');
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '');
             } catch (error) {
                 console.error('Error loading parameters:', error);
             }
