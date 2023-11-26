@@ -34,6 +34,28 @@ def initialize_database():
 # Initialize the database
 initialize_database()
 
+# Check if the 'templates' directory exists, create it if not
+templates_dir = os.path.join(os.path.dirname(__file__), 'templates')
+if not os.path.exists(templates_dir):
+    os.makedirs(templates_dir)
+
+# List of HTML files to check and copy if not found
+html_files = ['index.html', 'edit.html', 'delete.html']
+
+# Function to check and copy HTML files if not found
+def check_and_copy_html_files():
+    for html_file in html_files:
+        src_path = os.path.join('docker_app_templates', html_file)
+        dest_path = os.path.join(templates_dir, html_file)
+
+        if not os.path.exists(dest_path):
+            print(f"Copying {html_file} from Docker app...")
+            shutil.copy(src_path, dest_path)
+
+# Call the function to check and copy HTML files
+check_and_copy_html_files()
+
+
 # Calculate balances
 def calculate_balances():
     balances = {}
