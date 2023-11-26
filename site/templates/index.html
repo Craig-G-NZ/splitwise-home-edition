@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Splitwise home edition</title>
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="/css/styles.css">
     <script>
-        // Function to load parameters from a JSON file
         async function loadParameters() {
             try {
-                const response = await fetch('/app/config/parameters.json');  // Updated path
+                const response = await fetch('/app/config/parameters.json');
                 const parameters = await response.json();
-
-                // Update HTML content based on parameters
-                document.getElementById('output').innerHTML = `Parameter 1: ${parameters.names[0] || 'Not provided'}<br>Parameter 2: ${parameters.names[1] || 'Not provided'}`;
+    
+                // Update select options based on parameters
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
             } catch (error) {
                 console.error('Error loading parameters:', error);
             }
         }
-
-        // Load parameters when the document is ready
+    
+        function generateOptions(names, selectedName) {
+            return names.map(name => `<option value="${name}" ${selectedName === name ? 'selected' : ''}>${name}</option>`).join('');
+        }
+    
         document.addEventListener('DOMContentLoaded', loadParameters);
     </script>
 </head>
