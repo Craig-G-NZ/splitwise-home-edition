@@ -10,8 +10,8 @@
                 const parameters = await response.json();
     
                 // Update select options based on parameters
-                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names);
-                document.getElementById('split_with').innerHTML = generateOptions(parameters.names);
+                document.getElementById('add_paid_by').innerHTML = generateOptions(parameters.names);
+                document.getElementById('add_split_with').innerHTML = generateOptions(parameters.names);
             } catch (error) {
                 console.error('Error loading parameters:', error);
             }
@@ -22,8 +22,7 @@
         }
     
         document.addEventListener('DOMContentLoaded', loadParameters);
-        </script>
-
+    </script>
 </head>
 <body>
     <h1 class="heading heading1-emphasis">Splitwise Home Edition</h1>
@@ -61,15 +60,22 @@
             </tr>
             <tr>
                 <td><label for="amount">Amount:</label></td>
-                <td><input type="number" step="0.01" name="amount" required></td>
+                <td>
+                    <!-- Add a class to the input field for formatting -->
+                    <input type="number" step="0.01" name="amount" required>
+                </td>
             </tr>
             <tr>
-                <td><label for="paid_by">Paid by:</label></td>
-                <td><select name="paid_by" id="paid_by" required></select></td>
+                <td><label for="add_paid_by">Paid by:</label></td>
+                <td>
+                    <select name="paid_by" id="add_paid_by" required></select>
+                </td>
             </tr>
             <tr>
-                <td><label for="split_with">Split with:</label></td>
-                <td><select name="split_with" id="split_with" required></select></td>
+                <td><label for="add_split_with">Split with:</label></td>
+                <td>
+                    <select name="split_with" id="add_split_with" required></select>
+                </td>
             </tr>
             <tr>
                 <td><label for="is_equal_split">Equal Split:</label></td>
