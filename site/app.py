@@ -87,7 +87,7 @@ def index():
     # Sort expenses by the first element (ID column) in descending order
     sorted_expenses = sorted(expenses, key=lambda x: x[0], reverse=True)
 
-    return render_template('index.html', expenses=sorted_expenses, balances=balances, transaction_history=transaction_history)
+    return render_template('index.html', expenses=sorted_expenses, balances=balances, transaction_history=transaction_history, expense={})
 
 @app.route('/add_expense', methods=['POST'])
 def add_expense():
