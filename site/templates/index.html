@@ -12,17 +12,22 @@
                 // Update select options based on parameters
                 document.getElementById('add_paid_by').innerHTML = generateOptions(parameters.names);
                 document.getElementById('add_split_with').innerHTML = generateOptions(parameters.names);
+    
+                // For the edit page
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
             } catch (error) {
                 console.error('Error loading parameters:', error);
             }
         }
     
-        function generateOptions(names) {
-            return names.map(name => `<option value="${name}">${name}</option>`).join('');
+        function generateOptions(names, selectedName = null) {
+            return names.map(name => `<option value="${name}" ${selectedName === name ? 'selected' : ''}>${name}</option>`).join('');
         }
     
         document.addEventListener('DOMContentLoaded', loadParameters);
     </script>
+
 </head>
 <body>
     <h1 class="heading heading1-emphasis">Splitwise Home Edition</h1>
