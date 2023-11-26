@@ -7,20 +7,15 @@ It really only works for distributing money between 2 people as thats all I need
 To use.....
 
   docker run -d \
-    --name $CONTAINER_NAME \
+    --name splitwise-home-edition \
     --restart always \
-    --ip $IPADDRESS \
-    -p $PORT:80 \
-    -v $DB_DIR:/app/db:z \
-    -v $CONFIG_DIR:/app/config:z \
+    -p 80:80 \
+    -v /db_dir:/app/db:z \
+    -v /config_dir:/app/config:z \
     -e TZ=Pacific/Auckland \
-    -e PUID=0 \
-    -e GUID=0 \
-    $IMAGE_NAME:latest
+    skippynz/splitwise-home-edition:latest
 
-Create two directories:
-  config
-  db
+Create two directories: config and db
 
 Inside the config directory, create a parameters.json file with the following code and replace name1 and name2 as required.
   
