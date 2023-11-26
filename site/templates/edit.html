@@ -10,10 +10,6 @@
                 const parameters = await response.json();
     
                 // Update select options based on parameters
-                document.getElementById('add_paid_by').innerHTML = generateOptions(parameters.names);
-                document.getElementById('add_split_with').innerHTML = generateOptions(parameters.names);
-    
-                // For the edit page
                 document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
                 document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
             } catch (error) {
@@ -21,13 +17,12 @@
             }
         }
     
-        function generateOptions(names, selectedName = null) {
+        function generateOptions(names, selectedName) {
             return names.map(name => `<option value="${name}" ${selectedName === name ? 'selected' : ''}>${name}</option>`).join('');
         }
     
         document.addEventListener('DOMContentLoaded', loadParameters);
     </script>
-
 </head>
 <body>
     <h1 class="heading heading1-emphasis">Edit Expense</h1>
