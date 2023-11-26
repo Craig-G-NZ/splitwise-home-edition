@@ -3,6 +3,27 @@
 <head>
     <title>Splitwise Home Edition</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        async function loadParameters() {
+            try {
+                const response = await fetch('/app/config/parameters.json');
+                const parameters = await response.json();
+    
+                // Update select options based on parameters
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names);
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names);
+            } catch (error) {
+                console.error('Error loading parameters:', error);
+            }
+        }
+    
+        function generateOptions(names) {
+            return names.map(name => `<option value="${name}">${name}</option>`).join('');
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadParameters);
+        </script>
+
 </head>
 <body>
     <h1 class="heading heading1-emphasis">Splitwise Home Edition</h1>
@@ -46,21 +67,19 @@
                 </td>
             </tr>
             <tr>
-                <td><label for="paid_by">Paid by:</label></td>
                 <td>
-                    <select name="paid_by" required>
-                        <option value="Craig">Craig</option>
-                        <option value="Nikki">Nikki</option>
-                    </select>
+                    <label for="paid_by">Paid by:</label>
+                </td>
+                <td>
+                    <select name="paid_by" id="paid_by" required></select>
                 </td>
             </tr>
             <tr>
-                <td><label for="split_with">Split with:</label></td>
                 <td>
-                    <select name="split_with" required>
-                        <option value="Craig">Craig</option>
-                        <option value="Nikki">Nikki</option>
-                    </select>
+                    <label for="split_with">Split with:</label>
+                </td>
+                <td>
+                    <select name="split_with" id="split_with" required></select>
                 </td>
             </tr>
             <tr>
