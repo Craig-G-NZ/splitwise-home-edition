@@ -114,6 +114,10 @@ def add_expense():
 
     return redirect(url_for('index'))
 
+@app.route('/config/<path:filename>')
+def serve_parameters(filename):
+    return send_from_directory('config', filename)
+    
 @app.route('/edit/<int:index>', methods=['GET', 'POST'])
 def edit_expense(index):
     if request.method == 'POST':
