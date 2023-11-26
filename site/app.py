@@ -1,8 +1,8 @@
+import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, static_folder='css')
-
 
 # Database path
 db_path = 'db/expenses.db'
@@ -34,27 +34,14 @@ def initialize_database():
 # Initialize the database
 initialize_database()
 
-# Check if the 'templates' directory exists, create it if not
-templates_dir = os.path.join(os.path.dirname(__file__), 'templates')
-if not os.path.exists(templates_dir):
-    os.makedirs(templates_dir)
+# Check for the parameters file in the 'config' directory
+config_dir = os.path.join(os.path.dirname(__file__), 'config')
+params_file_path = os.path.join(config_dir, 'names.txt')
 
-# List of HTML files to check and copy if not found
-html_files = ['index.html', 'edit.html', 'delete.html']
-
-# Function to check and copy HTML files if not found
-def check_and_copy_html_files():
-    for html_file in html_files:
-        src_path = os.path.join('docker_app_templates', html_file)
-        dest_path = os.path.join(templates_dir, html_file)
-
-        if not os.path.exists(dest_path):
-            print(f"Copying {html_file} from Docker app...")
-            shutil.copy(src_path, dest_path)
-
-# Call the function to check and copy HTML files
-check_and_copy_html_files()
-
+if not os.path.exists(params_file_path):
+    # Handle the case where the parameters file is not found
+    print("Parameters file not found. Please create the parameters file in the 'config' directory.")
+    exit()
 
 # Calculate balances
 def calculate_balances():
@@ -64,7 +51,7 @@ def calculate_balances():
     cursor.execute('SELECT * FROM expenses')
 
     for row in cursor.fetchall():
-        id, description, amount, paid_by, split_with, is_equal_split,date = row
+        id, description, amount, paid_by, split_with, is_equal_split, date = row
         if paid_by not in balances:
             balances[paid_by] = 0
         if split_with not in balances:
