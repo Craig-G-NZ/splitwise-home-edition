@@ -6,13 +6,13 @@ It really only works for distributing money between 2 people as thats all I need
 
 To use.....
 
-  docker run -d \
-    --name splitwise-home-edition \
-    --restart always \
-    -p 80:80 \
-    -v /db_dir:/app/db:z \
-    -v /config_dir:/app/config:z \
-    -e TZ=Pacific/Auckland \
+  docker run -d \\
+    --name splitwise-home-edition \\
+    --restart always \\
+    -p 80:80 \\
+    -v /db_dir:/app/db:z \\
+    -v /config_dir:/app/config:z \\
+    -e TZ=Pacific/Auckland \\
     skippynz/splitwise-home-edition:latest
 
 Create two directories: config and db
