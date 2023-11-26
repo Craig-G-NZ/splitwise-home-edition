@@ -36,7 +36,7 @@ initialize_database()
 
 # Check for the parameters file in the 'config' directory
 config_dir = os.path.join(os.path.dirname(__file__), 'config')
-params_file_path = os.path.join(config_dir, 'names.txt')
+params_file_path = os.path.join(config_dir, 'parameters.json')
 
 if not os.path.exists(params_file_path):
     # Handle the case where the parameters file is not found
