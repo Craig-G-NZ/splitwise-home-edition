@@ -24,5 +24,5 @@ Create a directory and name it whatever you want e.g. data_dir - this will be us
 
 Feel free to create an issue if you want to discuss anything.
 
-![image](https://github.com/Craig-G-NZ/splitwise-home-edition/assets/92700720/1293c8aa-b1d8-4790-8510-783acbd4fcb7)
+![image](https://github.com/Craig-G-NZ/splitwise-home-edition/assets/92700720/bf8879a5-5a5e-475f-b5fb-a4274bdc7852)
 ![image](https://github.com/Craig-G-NZ/splitwise-home-edition/assets/92700720/e4469bb8-604a-494d-966a-887eb03d091f)
