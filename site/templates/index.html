@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ website_title }}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        async function loadParameters() {
+            try {
+                const response = await fetch('/data/config.json');
+                const parameters = await response.json();
+    
+                // Update select options based on parameters
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
+            } catch (error) {
+                console.error('Error loading parameters:', error);
+            }
+        }
+    
+        function generateOptions(names, selectedName) {
+            return names.map(name => `<option value="${name}" ${selectedName === name ? 'selected' : ''}>${name}</option>`).join('');
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadParameters);
+    </script>
+</head>
+<body>
+    <h1 class="heading heading1-emphasis">{{ website_name}}</h1>
+    
+    <h2 class="heading2-emphasis">Balances</h2>
+    <table class="form-table" >
+        <tr>
+            <th style="width: 300px; margin: 0 auto;">Name</th>
+            <th>Balance</th>
+        </tr>
+        {% for user, balance in balances.items() %}
+        <tr>
+            <td>{{ user }}</td>
+                {% if balance < 0 %}
+                    <td style="color: green;">Owed ${{ "{:.2f}".format(-balance) }}</td>
+                {% elif balance > 0 %}
+                    <td style="color: red;">Owes ${{ "{:.2f}".format(balance) }}</td>
+                {% else %}
+                    <td>Settled Up</td>
+                {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2 class="heading2-emphasis">Add an Expense</h2>
+    <table class="form-table" >
+        <form method="post" action="/add_expense">
+            <tr>
+                <td style="width: 300px; margin: 0 auto;"><label for="description">Description:</label></td>
+                <td><input type="text" name="description" required></td>
+            </tr>
+            <tr>
+                <td><label for="date">Date:</label></td>
+                <td><input type="date" name="date" required></td>
+            </tr>
+            <tr>
+                <td><label for="amount">Amount:</label></td>
+                <td>
+                    <!-- Add a class to the input field for formatting -->
+                    <input type="number" step="0.01" name="amount" required>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="add_paid_by">Paid by:</label></td>
+                <td>
+                    <select name="paid_by" id="paid_by" required></select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="add_split_with">Split with:</label></td>
+                <td>
+                    <select name="split_with" id="split_with" required></select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="is_equal_split">Equal Split:</label></td>
+                <td><input type="checkbox" name="is_equal_split" checked></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"><input type="submit" value="Add Expense" class="submit-button"></td>
+            </tr>
+        </form>
+    </table>
+    
+    <h2 class="heading2-emphasis">Expense Transaction History</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Paid by</th>
+            <th>Split with</th>
+            <th>Equal Split</th>
+            <th></th>
+        </tr>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense[0] }}</td>
+            <td>{{ expense[1] }}</td>
+            <td>{{ expense[6] }}</td>
+            <td>${{ "{:.2f}".format(expense[2]) }}</td>
+            <td>{{ expense[3] }}</td>
+            <td>{{ expense[4] }}</td>
+            <td>
+                {% if expense[5] == 1 %}
+                    <img src="{{ url_for('static', filename='green_tick.png') }}" alt="Green Tick">
+                {% else %}
+                    <img src="{{ url_for('static', filename='red_x.png') }}" alt="Red X">
+                {% endif %}
+            </td>
+            <td>
+                <a href="/edit/{{ expense[0] }}" class="edit-link edit-button">Edit</a>
+                <form method="POST" action="/delete/{{ expense[0] }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="delete-link delete-button">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

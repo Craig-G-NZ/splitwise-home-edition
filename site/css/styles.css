@@ -1,0 +1,117 @@
+/* Define a class for the heading */
+.heading {
+    font-size: 36px;
+    text-align: center;
+    color: #009688;
+    padding: 10px;
+    border: 2px solid #009688;
+    border-radius: 10px;
+    background-color: #009688;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Add drop shadow */
+}
+
+/* Optional: Add a background color and text shadow for extra emphasis */
+.heading1-emphasis {
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.heading2-emphasis {
+    color: #00d7c1;
+    text-shadow: 2px 2px 4px #000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+select {
+    width: 98%;
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+}
+
+table {
+    border-collapse: collapse;
+    width: 60%;
+    margin: 0 auto;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Add drop shadow */
+}
+
+table.form-table input {
+    width: 97%;
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 9px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+.submit-button {
+    background-color: #009688; /* Use your desired color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Add drop shadow */
+    width: 100%;
+}
+
+.edit-link, .delete-link {
+    background-color: #4CAF50; /* Green for Edit */
+    color: #fff;
+    border: 1px;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Add drop shadow */
+}
+
+.delete-link {
+    background-color: #FF0000; /* Red for Delete */
+}
+
+.top-right-link {
+    position: absolute;
+    text-decoration: none;
+    top: 9;
+    right: 1%;
+    margin: 10px;
+    font-size: 20px;
+
+    color: #ebebeb;
+}
+
+.top-right-link:visited {
+    color: #ebebeb;
+}

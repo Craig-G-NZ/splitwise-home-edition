@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ website_title }}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        async function loadParameters() {
+            try {
+                const response = await fetch('/data/config.json');
+                const parameters = await response.json();
+    
+                // Update select options based on parameters
+                document.getElementById('paid_by').innerHTML = generateOptions(parameters.names, '{{ expense[3] }}');
+                document.getElementById('split_with').innerHTML = generateOptions(parameters.names, '{{ expense[4] }}');
+            } catch (error) {
+                console.error('Error loading parameters:', error);
+            }
+        }
+    
+        function generateOptions(names, selectedName) {
+            return names.map(name => `<option value="${name}" ${selectedName === name ? 'selected' : ''}>${name}</option>`).join('');
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadParameters);
+    </script>
+</head>
+<body>
+    <h1 class="heading heading1-emphasis">Edit Expense<a class="top-right-link" href="javascript:history.back()">Go Back</a></h1>
+    <form method="post">
+        <table class="form-table">
+            <tr>
+                <td style="width: 300px; margin: 0 auto;"><label for="description">Description:</label></td>
+                <td><input type="text" name="description" value="{{ expense[1] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="date">Date:</label></td>
+                <td><input type="date" name="date" value="{{ expense[6] }}" required></td> <!-- Add a date input field with the value from the expense -->
+            </tr>
+            <tr>
+                <td><label for="amount">Amount:</label></td>
+                <td><input type="number" step="0.01" name="amount" value="{{ expense[2] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="paid_by">Paid by:</label></td>
+                <td>                    
+                    <select name="paid_by" id="paid_by" required></select> <!-- Add an id to the select element -->
+                </td>
+            </tr>
+            <tr>
+                <td><label for="split_with">Split with:</label></td>
+                <td>
+                    <select name="split_with" id="split_with" required></select> <!-- Add an id to the select element -->
+                </td>
+            </tr>
+            <tr>
+                <td><label for="is_equal_split">Equal Split:</label></td>
+                <td><input type="checkbox" name="is_equal_split" {% if expense[5] %}checked{% endif %}></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Update" class="submit-button">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
