@@ -100,7 +100,7 @@
             <th>Equal Split</th>
             <th></th>
         </tr>
-        {% for expense in sorted(expenses, key=lambda x: x[6], reverse=True) %}
+        {% for expense in expenses | sort(attribute='6', reverse=true) %}
         <tr>
             <td>{{ expense[0] }}</td>
             <td>{{ expense[1] }}</td>
